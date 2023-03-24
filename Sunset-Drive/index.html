@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title></title>
+    <link rel="stylesheet" href="/lib/styling.css">
+  </head>
+  <body>
+    <center>
+    <!-- <script src="projection.js"></script> -->
+    <script src="./lib/jquery-2.1.1.js"></script>
+    <script src="./lib/util.js"></script>
+    <script src="./lib/game.js"></script>
+    <link href="./lib/styling.css" rel="stylesheet" type="text/css" />
+
+      <button id="reset">
+        Restart
+      </button>
+    </div>
+    <canvas></canvas>
+    <script>
+      var canvasEl = document.getElementsByTagName("canvas")[0];
+      var context = canvasEl.getContext("2d");
+      canvasEl.height = (window.innerHeight - 10) / 1.2;
+      canvasEl.width = (window.innerWidth - 10) / 2;
+
+      function restart() {
+        var newGame = new Racer.Game(context, canvasEl.width, canvasEl.height);
+        newGame.run();
+        $(document).on('keydown', newGame.keyPressed.bind(newGame));
+        $(document).on('keyup',  newGame.keyUnpressed.bind(newGame));
+      };
+      restart();
+      $('#reset').on('click', restart);
+
+    </script>
+  </body>
+
+</html>
